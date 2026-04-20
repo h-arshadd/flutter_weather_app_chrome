@@ -108,5 +108,5 @@ This project is based on the original open-source work by **Abd Qader**:
 
 ## License
 
-This project is for educational purposes (Final Year Project).
+This project is for educational purposes.
 Original project licensed under MIT — see [original repo](https://github.com/AbdQader/flutter_weather_app) for details.

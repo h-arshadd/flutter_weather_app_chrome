@@ -4,7 +4,21 @@ A beautiful weather application built with Flutter that shows real-time weather,
 
 ## Screenshots
 
-> *(Add your own screenshots here)*
+| Welcome | Weather |
+|---------|---------|
+| ![Welcome](screenshots/welcome.png) | ![Weather](screenshots/weather.png) |
+
+| 24-Hour Forecast | Location |
+|-----------------|-------------|
+| ![Forecast](screenshots/forecast.png) | ![Weather Now](screenshots/location.png) |
+
+| Settings | Urdu Language |
+|----------|---------------|
+| ![Settings](screenshots/settings.png) | ![Urdu](screenshots/urdu.png) |
+
+| Dark Mode |
+|-----------|
+| ![Dark Mode](screenshots/dark_mode.png) |
 
 ## Features
 

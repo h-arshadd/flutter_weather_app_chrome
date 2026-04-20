@@ -2,18 +2,16 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
-import '../../../../components/custom_icon_button.dart';
-
 class WeatherDetailsItem extends StatelessWidget {
   final String title;
-  final String icon;
+  final String icon; // kept for API compat, ignored internally
   final String value;
   final String text;
   final bool isHalfCircle;
+
   const WeatherDetailsItem({
     super.key,
     required this.title,
@@ -26,6 +24,12 @@ class WeatherDetailsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
+
+    // Wind → tornado/swirl icon. Pressure → compress/gauge icon.
+    // Using distinct icons so they look different from each other.
+    final IconData iconData =
+        isHalfCircle ? Icons.compress_rounded : Icons.tornado_rounded;
+
     return Container(
       width: 180.w,
       padding: EdgeInsets.all(16.r),
@@ -36,29 +40,39 @@ class WeatherDetailsItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // ── Header chip ──────────────────────────────────
           Container(
-            height: 30.h,
-            padding: EdgeInsetsDirectional.only(end: 8.w),
+            height: 32,  // fixed height — no .h scaling
+            padding: const EdgeInsetsDirectional.only(end: 10),
             decoration: BoxDecoration(
               color: theme.canvasColor,
-              borderRadius: BorderRadius.circular(30.r),
+              borderRadius: BorderRadius.circular(30),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                CustomIconButton(
-                  onPressed: null,
-                  icon: SvgPicture.asset(icon, fit: BoxFit.none),
-                  backgroundColor: theme.primaryColor,
-                  width: 30.w, height: 30.h,
+                // Square-rounded icon badge
+                Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    color: theme.primaryColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Icon(
+                    iconData,
+                    color: Colors.white,
+                    size: 17,
+                  ),
                 ),
-                5.horizontalSpace,
+                const SizedBox(width: 7),
                 Text(title, style: theme.textTheme.bodyLarge),
               ],
             ),
           ),
-          16.verticalSpace,
+          const SizedBox(height: 16),
+
+          // ── Circular ring ────────────────────────────────
           CircularStepProgressIndicator(
             totalSteps: 32,
             currentStep: 16,
@@ -82,12 +96,14 @@ class WeatherDetailsItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      value, style: theme.textTheme.displayMedium?.copyWith(
+                      value,
+                      style: theme.textTheme.displayMedium?.copyWith(
                         color: Colors.white,
                       ),
                     ),
                     Text(
-                      text, style: theme.textTheme.bodySmall?.copyWith(
+                      text,
+                      style: theme.textTheme.bodySmall?.copyWith(
                         fontSize: 12.sp,
                         color: Colors.white,
                       ),

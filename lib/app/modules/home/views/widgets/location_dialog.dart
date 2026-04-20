@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../config/translations/strings_enum.dart';
-import '../../../../../utils/constants.dart';
 import '../../../../components/custom_button.dart';
 import '../../controllers/home_controller.dart';
 
@@ -27,58 +26,66 @@ class LocationDialog extends StatelessWidget {
           color: theme.cardColor,
           borderRadius: BorderRadius.circular(30.r),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 35.w, vertical: 24.h),
+        padding: EdgeInsets.symmetric(horizontal: 35.w, vertical: 28.h),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CircleAvatar(
-              backgroundColor: theme.primaryColor,
-              radius: 70.r,
-              child: Center(
-                child: Image.asset(Constants.logo, width: 103.w, height: 103.h),
+            // Location icon in a styled circle
+            Container(
+              width: 110.r,
+              height: 110.r,
+              decoration: BoxDecoration(
+                color: theme.primaryColor.withOpacity(0.12),
+                shape: BoxShape.circle,
               ),
-            ).animate().fade().slideY(
-              duration: 300.ms,
-              begin: -1,
-              curve: Curves.easeInSine,
-            ),
-            24.verticalSpace,
+              child: Center(
+                child: Icon(
+                  Icons.my_location_rounded,
+                  size: 52.sp,
+                  color: theme.primaryColor,
+                ),
+              ),
+            ).animate().fade().scale(
+                  duration: 350.ms,
+                  curve: Curves.easeOutBack,
+                ),
+            28.verticalSpace,
             Text(
               Strings.locationPermissionNeeded.tr,
-              style: theme.textTheme.displayMedium,
+              style: theme.textTheme.displayMedium?.copyWith(fontSize: 18.sp),
               textAlign: TextAlign.center,
             ).animate().fade().slideY(
               duration: 300.ms,
-              begin: -1,
-              curve: Curves.easeInSine,
+              begin: 0.3,
+              curve: Curves.easeOut,
             ),
-            16.verticalSpace,
+            14.verticalSpace,
             Text(
               Strings.pleaseEnableLocationPermission.tr,
-              style: theme.textTheme.bodyMedium?.copyWith(height: 1),
+              style: theme.textTheme.bodyMedium?.copyWith(height: 1.55),
               textAlign: TextAlign.center,
             ).animate().fade().slideY(
               duration: 300.ms,
-              begin: -1,
-              curve: Curves.easeInSine,
+              begin: 0.3,
+              curve: Curves.easeOut,
             ),
-            80.verticalSpace,
+            36.verticalSpace,
             CustomButton(
               onPressed: () {
                 Get.back();
                 HomeController.instance.getUserLocation();
               },
               text: Strings.allowLocation.tr,
-              fontSize: 18.sp,
+              fontSize: 16.sp,
               backgroundColor: theme.primaryColor,
               foregroundColor: Colors.white,
-              width: 265.w,
+              width: double.infinity,
               radius: 30.r,
-              verticalPadding: 20.h,
+              verticalPadding: 18.h,
             ).animate().fade().slideY(
               duration: 300.ms,
-              begin: 1,
-              curve: Curves.easeInSine,
+              begin: 0.5,
+              curve: Curves.easeOut,
             ),
           ],
         ),

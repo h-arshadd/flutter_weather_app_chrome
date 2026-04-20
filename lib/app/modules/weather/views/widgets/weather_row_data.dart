@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class WeatherRowData extends StatelessWidget {
@@ -16,16 +15,23 @@ class WeatherRowData extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              text, style: theme.textTheme.displaySmall?.copyWith(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.normal
+            // Label — shrinks before value overflows
+            Flexible(
+              child: Text(
+                text,
+                style: theme.textTheme.displaySmall?.copyWith(
+                  fontSize: 13,
+                  fontWeight: FontWeight.normal,
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
               ),
             ),
+            const SizedBox(width: 8),
+            // Value — never shrinks (it's the number)
             Text(
-              value, style: theme.textTheme.displayMedium?.copyWith(
-                fontSize: 14.sp,
-              ),
+              value,
+              style: theme.textTheme.displayMedium?.copyWith(fontSize: 13),
             ),
           ],
         ),

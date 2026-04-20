@@ -52,29 +52,29 @@ class Current {
   });
 
   factory Current.fromJson(Map<String, dynamic> json) => Current(
-    lastUpdatedEpoch: json['last_updated_epoch'],
-    lastUpdated: json['last_updated'],
-    tempC: json['temp_c']?.toDouble(),
-    tempF: json['temp_f']?.toDouble(),
-    isDay: json['is_day'],
+    lastUpdatedEpoch: (json['last_updated_epoch'] as num).toInt(),
+    lastUpdated: json['last_updated'].toString(),
+    tempC: (json['temp_c'] as num).toDouble(),
+    tempF: (json['temp_f'] as num).toDouble(),
+    isDay: (json['is_day'] as num).toInt(),
     condition: Condition.fromJson(json['condition']),
-    windMph: json['wind_mph']?.toDouble(),
-    windKph: json['wind_kph'],
-    windDegree: json['wind_degree'],
-    windDir: json['wind_dir'],
-    pressureMb: json['pressure_mb'],
-    pressureIn: json['pressure_in']?.toDouble(),
-    precipMm: json['precip_mm'],
-    precipIn: json['precip_in'],
-    humidity: json['humidity'],
-    cloud: json['cloud'],
-    feelslikeC: json['feelslike_c']?.toDouble(),
-    feelslikeF: json['feelslike_f']?.toDouble(),
-    visKm: json['vis_km'],
-    visMiles: json['vis_miles'],
-    uv: json['uv'],
-    gustMph: json['gust_mph']?.toDouble(),
-    gustKph: json['gust_kph'],
+    windMph: (json['wind_mph'] as num).toDouble(),
+    windKph: (json['wind_kph'] as num).toDouble(),       // ← was missing toDouble()
+    windDegree: (json['wind_degree'] as num).toInt(),
+    windDir: json['wind_dir'].toString(),
+    pressureMb: (json['pressure_mb'] as num).toDouble(), // ← was missing toDouble()
+    pressureIn: (json['pressure_in'] as num).toDouble(),
+    precipMm: (json['precip_mm'] as num).toDouble(),     // ← was missing toDouble()
+    precipIn: (json['precip_in'] as num).toDouble(),     // ← was missing toDouble()
+    humidity: (json['humidity'] as num).toInt(),
+    cloud: (json['cloud'] as num).toInt(),
+    feelslikeC: (json['feelslike_c'] as num).toDouble(),
+    feelslikeF: (json['feelslike_f'] as num).toDouble(),
+    visKm: (json['vis_km'] as num).toDouble(),           // ← was missing toDouble()
+    visMiles: (json['vis_miles'] as num).toDouble(),     // ← was missing toDouble()
+    uv: (json['uv'] as num).toDouble(),                  // ← was missing toDouble()
+    gustMph: (json['gust_mph'] as num).toDouble(),
+    gustKph: (json['gust_kph'] as num).toDouble(),       // ← was missing toDouble()
   );
 
   Map<String, dynamic> toJson() => {

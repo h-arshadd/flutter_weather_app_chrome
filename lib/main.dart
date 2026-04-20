@@ -10,15 +10,10 @@ import 'config/theme/my_theme.dart';
 import 'config/translations/localization_service.dart';
 
 void main() async {
-  // wait for bindings
   WidgetsFlutterBinding.ensureInitialized();
-
-  // init shared preference
   await MySharedPref.init();
-  
-  // init date format language
   await initializeDateFormatting(
-    LocalizationService.getCurrentLocal().languageCode
+    LocalizationService.getCurrentLocal().languageCode,
   );
 
   runApp(
@@ -33,14 +28,17 @@ void main() async {
           title: 'Weather App',
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
-          builder: (context,widget) {
+          builder: (context, child) {
             return Theme(
               data: MyTheme.getThemeData(
-                isLight: MySharedPref.getThemeIsLight()
+                isLight: MySharedPref.getThemeIsLight(),
               ),
               child: MediaQuery(
-                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                child: widget!,
+                // Prevent system font scaling from breaking layout
+                data: MediaQuery.of(context).copyWith(
+                  textScaler: TextScaler.noScaling,
+                ),
+                child: child!,
               ),
             );
           },

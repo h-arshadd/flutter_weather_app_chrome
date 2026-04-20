@@ -27,17 +27,17 @@ class WeatherDetailsModel {
 }
 
 class Forecast {
-    List<Forecastday> forecastday;
+  List<Forecastday> forecastday;
 
-    Forecast({required this.forecastday});
+  Forecast({required this.forecastday});
 
-    factory Forecast.fromJson(Map<String, dynamic> json) => Forecast(
-      forecastday: List<Forecastday>.from(json['forecastday'].map((x) => Forecastday.fromJson(x))),
-    );
+  factory Forecast.fromJson(Map<String, dynamic> json) => Forecast(
+    forecastday: List<Forecastday>.from(json['forecastday'].map((x) => Forecastday.fromJson(x))),
+  );
 
-    Map<String, dynamic> toJson() => {
-      'forecastday': List<dynamic>.from(forecastday.map((x) => x.toJson())),
-    };
+  Map<String, dynamic> toJson() => {
+    'forecastday': List<dynamic>.from(forecastday.map((x) => x.toJson())),
+  };
 }
 
 class Forecastday {
@@ -94,12 +94,12 @@ class Astro {
   });
 
   factory Astro.fromJson(Map<String, dynamic> json) => Astro(
-    sunrise: json['sunrise'],
-    sunset: json['sunset'],
-    moonrise: json['moonrise'],
-    moonset: json['moonset'],
-    moonPhase: json['moon_phase'],
-    moonIllumination: json['moon_illumination'],
+    sunrise: json['sunrise'].toString(),
+    sunset: json['sunset'].toString(),
+    moonrise: json['moonrise'].toString(),
+    moonset: json['moonset'].toString(),
+    moonPhase: json['moon_phase'].toString(),
+    moonIllumination: json['moon_illumination'].toString(), // ← THE CRASH FIX
     isMoonUp: json['is_moon_up'],
     isSunUp: json['is_sun_up'],
   );
@@ -125,18 +125,18 @@ class Day {
   double avgtempF;
   double maxwindMph;
   double maxwindKph;
-  num totalprecipMm;
-  num totalprecipIn;
-  num totalsnowCm;
-  num avgvisKm;
-  num avgvisMiles;
-  num avghumidity;
-  num dailyWillItRain;
-  num dailyChanceOfRain;
-  num dailyWillItSnow;
-  num dailyChanceOfSnow;
+  double totalprecipMm;
+  double totalprecipIn;
+  double totalsnowCm;
+  double avgvisKm;
+  double avgvisMiles;
+  int avghumidity;
+  int dailyWillItRain;
+  int dailyChanceOfRain;
+  int dailyWillItSnow;
+  int dailyChanceOfSnow;
   Condition condition;
-  num uv;
+  double uv;
 
   Day({
     required this.maxtempC,
@@ -162,26 +162,26 @@ class Day {
   });
 
   factory Day.fromJson(Map<String, dynamic> json) => Day(
-    maxtempC: json['maxtemp_c']?.toDouble(),
-    maxtempF: json['maxtemp_f']?.toDouble(),
-    mintempC: json['mintemp_c']?.toDouble(),
-    mintempF: json['mintemp_f']?.toDouble(),
-    avgtempC: json['avgtemp_c']?.toDouble(),
-    avgtempF: json['avgtemp_f']?.toDouble(),
-    maxwindMph: json['maxwind_mph']?.toDouble(),
-    maxwindKph: json['maxwind_kph']?.toDouble(),
-    totalprecipMm: json['totalprecip_mm'],
-    totalprecipIn: json['totalprecip_in'],
-    totalsnowCm: json['totalsnow_cm'],
-    avgvisKm: json['avgvis_km'],
-    avgvisMiles: json['avgvis_miles'],
-    avghumidity: json['avghumidity'],
-    dailyWillItRain: json['daily_will_it_rain'],
-    dailyChanceOfRain: json['daily_chance_of_rain'],
-    dailyWillItSnow: json['daily_will_it_snow'],
-    dailyChanceOfSnow: json['daily_chance_of_snow'],
+    maxtempC: (json['maxtemp_c'] as num).toDouble(),
+    maxtempF: (json['maxtemp_f'] as num).toDouble(),
+    mintempC: (json['mintemp_c'] as num).toDouble(),
+    mintempF: (json['mintemp_f'] as num).toDouble(),
+    avgtempC: (json['avgtemp_c'] as num).toDouble(),
+    avgtempF: (json['avgtemp_f'] as num).toDouble(),
+    maxwindMph: (json['maxwind_mph'] as num).toDouble(),
+    maxwindKph: (json['maxwind_kph'] as num).toDouble(),
+    totalprecipMm: (json['totalprecip_mm'] as num).toDouble(),
+    totalprecipIn: (json['totalprecip_in'] as num).toDouble(),
+    totalsnowCm: (json['totalsnow_cm'] as num).toDouble(),
+    avgvisKm: (json['avgvis_km'] as num).toDouble(),
+    avgvisMiles: (json['avgvis_miles'] as num).toDouble(),
+    avghumidity: (json['avghumidity'] as num).toInt(),
+    dailyWillItRain: (json['daily_will_it_rain'] as num).toInt(),
+    dailyChanceOfRain: (json['daily_chance_of_rain'] as num).toInt(),
+    dailyWillItSnow: (json['daily_will_it_snow'] as num).toInt(),
+    dailyChanceOfSnow: (json['daily_chance_of_snow'] as num).toInt(),
     condition: Condition.fromJson(json['condition']),
-    uv: json['uv'],
+    uv: (json['uv'] as num).toDouble(),
   );
 
   Map<String, dynamic> toJson() => {
@@ -209,22 +209,22 @@ class Day {
 }
 
 class Hour {
-  num timeEpoch;
+  int timeEpoch;
   String time;
   double tempC;
   double tempF;
-  num isDay;
+  int isDay;
   Condition condition;
   double windMph;
   double windKph;
-  num windDegree;
+  int windDegree;
   String windDir;
-  num pressureMb;
+  double pressureMb;
   double pressureIn;
-  num precipMm;
-  num precipIn;
-  num humidity;
-  num cloud;
+  double precipMm;
+  double precipIn;
+  int humidity;
+  int cloud;
   double feelslikeC;
   double feelslikeF;
   double windchillC;
@@ -233,15 +233,15 @@ class Hour {
   double heatindexF;
   double dewpointC;
   double dewpointF;
-  num willItRain;
-  num chanceOfRain;
-  num willItSnow;
-  num chanceOfSnow;
-  num visKm;
-  num visMiles;
+  int willItRain;
+  int chanceOfRain;
+  int willItSnow;
+  int chanceOfSnow;
+  double visKm;
+  double visMiles;
   double gustMph;
   double gustKph;
-  num uv;
+  double uv;
 
   Hour({
     required this.timeEpoch,
@@ -280,39 +280,39 @@ class Hour {
   });
 
   factory Hour.fromJson(Map<String, dynamic> json) => Hour(
-    timeEpoch: json['time_epoch'],
-    time: json['time'],
-    tempC: json['temp_c']?.toDouble(),
-    tempF: json['temp_f']?.toDouble(),
-    isDay: json['is_day'],
+    timeEpoch: (json['time_epoch'] as num).toInt(),
+    time: json['time'].toString(),
+    tempC: (json['temp_c'] as num).toDouble(),
+    tempF: (json['temp_f'] as num).toDouble(),
+    isDay: (json['is_day'] as num).toInt(),
     condition: Condition.fromJson(json['condition']),
-    windMph: json['wind_mph']?.toDouble(),
-    windKph: json['wind_kph']?.toDouble(),
-    windDegree: json['wind_degree'],
-    windDir: json['wind_dir'],
-    pressureMb: json['pressure_mb'],
-    pressureIn: json['pressure_in']?.toDouble(),
-    precipMm: json['precip_mm'],
-    precipIn: json['precip_in'],
-    humidity: json['humidity'],
-    cloud: json['cloud'],
-    feelslikeC: json['feelslike_c']?.toDouble(),
-    feelslikeF: json['feelslike_f']?.toDouble(),
-    windchillC: json['windchill_c']?.toDouble(),
-    windchillF: json['windchill_f']?.toDouble(),
-    heatindexC: json['heatindex_c']?.toDouble(),
-    heatindexF: json['heatindex_f']?.toDouble(),
-    dewpointC: json['dewpoint_c']?.toDouble(),
-    dewpointF: json['dewpoint_f']?.toDouble(),
-    willItRain: json['will_it_rain'],
-    chanceOfRain: json['chance_of_rain'],
-    willItSnow: json['will_it_snow'],
-    chanceOfSnow: json['chance_of_snow'],
-    visKm: json['vis_km'],
-    visMiles: json['vis_miles'],
-    gustMph: json['gust_mph']?.toDouble(),
-    gustKph: json['gust_kph']?.toDouble(),
-    uv: json['uv'],
+    windMph: (json['wind_mph'] as num).toDouble(),
+    windKph: (json['wind_kph'] as num).toDouble(),
+    windDegree: (json['wind_degree'] as num).toInt(),
+    windDir: json['wind_dir'].toString(),
+    pressureMb: (json['pressure_mb'] as num).toDouble(),
+    pressureIn: (json['pressure_in'] as num).toDouble(),
+    precipMm: (json['precip_mm'] as num).toDouble(),
+    precipIn: (json['precip_in'] as num).toDouble(),
+    humidity: (json['humidity'] as num).toInt(),
+    cloud: (json['cloud'] as num).toInt(),
+    feelslikeC: (json['feelslike_c'] as num).toDouble(),
+    feelslikeF: (json['feelslike_f'] as num).toDouble(),
+    windchillC: (json['windchill_c'] as num).toDouble(),
+    windchillF: (json['windchill_f'] as num).toDouble(),
+    heatindexC: (json['heatindex_c'] as num).toDouble(),
+    heatindexF: (json['heatindex_f'] as num).toDouble(),
+    dewpointC: (json['dewpoint_c'] as num).toDouble(),
+    dewpointF: (json['dewpoint_f'] as num).toDouble(),
+    willItRain: (json['will_it_rain'] as num).toInt(),
+    chanceOfRain: (json['chance_of_rain'] as num).toInt(),
+    willItSnow: (json['will_it_snow'] as num).toInt(),
+    chanceOfSnow: (json['chance_of_snow'] as num).toInt(),
+    visKm: (json['vis_km'] as num).toDouble(),
+    visMiles: (json['vis_miles'] as num).toDouble(),
+    gustMph: (json['gust_mph'] as num).toDouble(),
+    gustKph: (json['gust_kph'] as num).toDouble(),
+    uv: (json['uv'] as num).toDouble(),
   );
 
   Map<String, dynamic> toJson() => {

@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class SunRiseSetItem extends StatelessWidget {
   final String text;
   final String value;
-  const SunRiseSetItem({
-    super.key,
-    required this.text,
-    required this.value
-  });
+  const SunRiseSetItem({super.key, required this.text, required this.value});
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(value, style: Get.theme.textTheme.displayMedium?.copyWith(
-          fontSize: 14.sp,
-        )),
-        10.horizontalSpace,
-        Text(text, style: Get.theme.textTheme.displaySmall?.copyWith(
-          fontSize: 14.sp,
-          fontWeight: FontWeight.normal
-        )),
+        // Time value — never shrinks
+        Text(
+          value,
+          style: Get.theme.textTheme.displayMedium?.copyWith(fontSize: 13),
+        ),
+        const SizedBox(width: 8),
+        // Label — shrinks with ellipsis before it overflows
+        Flexible(
+          child: Text(
+            text,
+            style: Get.theme.textTheme.displaySmall?.copyWith(
+              fontSize: 13,
+              fontWeight: FontWeight.normal,
+            ),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            textAlign: TextAlign.end,
+          ),
+        ),
       ],
     );
   }

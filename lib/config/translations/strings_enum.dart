@@ -19,7 +19,7 @@ class Strings {
   static const String alreadyHaveAnAccount = 'alreadyHaveAnAccount';
   static const String login = 'login';
 
-  static const String helloAbdQader = 'helloAbdQader';
+  static const String helloUser = 'helloUser';
   static const String discoverTheWeather = 'discoverTheWeather';
   static const String aroundTheWorld = 'aroundTheWorld';
 
@@ -38,11 +38,13 @@ class Strings {
   static const String realFeel = 'realFeel';
   static const String uv = 'uv';
   static const String chanceOfRain = 'chanceOfRain';
-  
+
   static const String today = 'today';
   static const String now = 'now';
   static const String kmh = 'km/h';
+  static const String mph = 'mph';
   static const String celsius = 'celsius';
+  static const String fahrenheit = 'fahrenheit';
 
   static const String north = 'north';
   static const String south = 'south';
@@ -52,4 +54,13 @@ class Strings {
   static const String southeast = 'southeast';
   static const String southwest = 'southwest';
   static const String northwest = 'northwest';
+
+  // Settings labels
+  static const String settings = 'settings';
+  static const String tempUnit = 'tempUnit';
+  static const String windUnit = 'windUnit';
+  static const String language = 'language';
+  static const String theme = 'theme';
+  static const String darkMode = 'darkMode';
+  static const String lightMode = 'lightMode';
 }

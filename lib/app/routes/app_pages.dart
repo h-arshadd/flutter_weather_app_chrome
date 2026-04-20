@@ -36,8 +36,9 @@ class AppPages {
       name: _Paths.WEATHER,
       page: () => const WeatherView(),
       binding: WeatherBinding(),
-      transition: Transition.rightToLeft,
-      transitionDuration: const Duration(milliseconds: 250),
+      // No transition from home -> weather since home replaces itself
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 350),
     ),
   ];
 }

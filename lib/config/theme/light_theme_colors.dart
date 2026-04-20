@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class LightThemeColors {
-  // PRIMARY
-  static const Color primaryColor = Color(0xFF6151C3);
-  static const Color primaryColorLight = Color(0xFFC0B9E7);
-  static const Color primaryColorDark = Color(0xFF8174CF);
+  // PRIMARY - Teal/Emerald palette (replacing purple)
+  static const Color primaryColor = Color(0xFF0D9488);   // teal-600
+  static const Color primaryColorLight = Color(0xFF99F6E4); // teal-200
+  static const Color primaryColorDark = Color(0xFF0F766E);  // teal-700
 
   // SECONDARY COLOR
-  static const Color accentColor = Color(0xFFF3F3F3);
+  static const Color accentColor = Color(0xFFF0FDFB);
 
   //APPBAR
   static const Color appBarColor = Colors.transparent;
@@ -15,17 +15,16 @@ class LightThemeColors {
   //SCAFFOLD
   static const Color scaffoldBackgroundColor = Colors.white;
   static const Color backgroundColor = Colors.white;
-  static const Color dividerColor = Color(0xFFEFEEF9);
-  static const Color canvasColor = Color(0xFFF7F6FC);
+  static const Color dividerColor = Color(0xFFCCFBF1);
+  static const Color canvasColor = Color(0xFFF0FDFB);
   static const Color cardColor = Colors.white;
 
   // SHADOW
-  //static const Color shadowColor = Color(0xFF1B1E22);
   static const Color shadowColor = Colors.grey;
 
   //ICONS
   static const Color appBarIconsColor = Colors.white;
-  static const Color iconColor = Color(0xFF080713);
+  static const Color iconColor = Color(0xFF134E4A);
 
   //BUTTON
   static const Color buttonColor = primaryColor;
@@ -34,10 +33,10 @@ class LightThemeColors {
   static const Color buttonDisabledTextColor = Colors.black;
 
   //TEXT
-  static const Color bodyTextColor = Color(0xFF6B6A71);
-  static const Color displayTextColor = Color(0xFF080713);
-  static const Color bodySmallTextColor = Color(0xFF080713);
-  static const Color hintTextColor =  Color(0xff686868);
+  static const Color bodyTextColor = Color(0xFF6B7280);
+  static const Color displayTextColor = Color(0xFF134E4A);
+  static const Color bodySmallTextColor = Color(0xFF134E4A);
+  static const Color hintTextColor = Color(0xff686868);
 
   //chip
   static const Color chipBackground = Colors.white;
@@ -54,8 +53,7 @@ class LightThemeColors {
 
   //------------------- custom theme (extensions) ------------------- //
   // shimmer theme
-  static const Color shimmerBackgroundColor = Color(0xFFF9F8F8);
-  static const Color shimmerBaseColor = Color(0xFFF1EFEF);
-  static const Color shimmerHighlightColor = Color(0xFFE7E5E5);
-
+  static const Color shimmerBackgroundColor = Color(0xFFF9FEFF);
+  static const Color shimmerBaseColor = Color(0xFFE0F7F4);
+  static const Color shimmerHighlightColor = Color(0xFFC7F2ED);
 }

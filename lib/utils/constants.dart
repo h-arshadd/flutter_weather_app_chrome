@@ -1,20 +1,21 @@
 class Constants {
-  // api key
-  static const mApiKey = 'Your API Key';
-  
 
-  // api urls
-  static const baseUrl = 'http://api.weatherapi.com/v1';
+  static const apiKey = "YOUR_API_KEY_HERE";
+
+  // ✅ BASE URL (use HTTPS, not HTTP)
+  static const baseUrl = 'https://api.weatherapi.com/v1';
+
+  // ✅ ENDPOINTS
   static const currentWeatherApiUrl = '$baseUrl/current.json';
   static const forecastWeatherApiUrl = '$baseUrl/forecast.json';
 
-  // api fields
+  // ✅ QUERY PARAMS
   static const key = 'key';
   static const q = 'q';
   static const days = 'days';
   static const lang = 'lang';
 
-  // assets
+  // assets (leave as is)
   static const logo = 'assets/images/app_icon.png';
   static const welcome = 'assets/images/welcome.png';
   static const world = 'assets/images/world.png';
@@ -26,6 +27,6 @@ class Constants {
   static const downArrow = 'assets/vectors/down_arrow.svg';
   static const wind = 'assets/vectors/wind.svg';
   static const pressure = 'assets/vectors/pressure.svg';
-  
+
   static const weatherAnimation = 'assets/data/weather_animation.json';
 }

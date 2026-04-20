@@ -1,89 +1,112 @@
-# Flutter Weather App
+# Flutter Weather App 🌤️
 
-A Flutter Application To Discover The Weather Using [WeatherAPI](https://www.weatherapi.com) 🚀
+A beautiful weather application built with Flutter that shows real-time weather, 7-day forecasts, hourly details, and supports both English and Urdu languages.
 
-The weather app is a design implementation of [Weather App](https://dribbble.com/shots/17423785-Weather-Interface) designed by [Zesan](https://dribbble.com/zesan).
+## Screenshots
 
-This project relied on this [Flutter Getx Template](https://github.com/EmadBeltaje/flutter_getx_template) made by [Emad Beltaje](https://github.com/EmadBeltaje).
+> *(Add your own screenshots here)*
 
-## Demo of the application 🎥
-![Flutter Weather App Demo](https://github.com/AbdQader/flutter_weather_app/assets/64075836/7cbccfc6-1d2d-4a55-8297-df97ef6ec787)
+## Features
 
----
+- 🌐 Runs on Chrome/web (original was mobile only)
+- 🌍 Real-time weather for any location worldwide
+- 📅 7-day forecast with tap-to-select days
+- 🕐 24-hour hourly forecast
+- 🌡️ Toggle between Celsius and Fahrenheit
+- 💨 Toggle between km/h and mph wind speed
+- 🌙 Light and Dark theme support
+- 🇵🇰 English and Urdu language support (RTL)
+- 🔍 Search any city worldwide
+- 📍 Auto-detect current location
 
-## Screenshots of the application 📷
+## Tech Stack
 
-### Light Mode ☀
-
-![LightMode](https://github.com/AbdQader/flutter_weather_app/assets/64075836/87819a55-be29-401c-b332-d15694afb8fb)
-
----
-### Dark Mode 🌙
-
-![DarkMode](https://github.com/AbdQader/flutter_weather_app/assets/64075836/af388ce0-9e88-417d-b777-7b185ea20e2d)
-
----
-
-## Overview 📙
-The Flutter Weather App is a visually captivating and fully functional User Interface for discovering the weather status. The app allows users to access their accurate weather information in addition to some cities around the world. It provides real-time weather updates, forecasts, and more.
-
----
-## Dependencies 📦️
-
-- [get](https://pub.dev/packages/get) - Manage states and inject dependencies.
-- [dio](https://pub.dev/packages/dio) - A powerful HTTP networking package for Dart/Flutter.
-- [location](https://pub.dev/packages/location) - For easy access to device's location in real-time.
-- [smooth_page_indicator](https://pub.dev/packages/smooth_page_indicator) - Customizable animated page indicator with a set of built-in effects.
-- [flutter_spinkit](https://pub.dev/packages/flutter_spinkit) - A collection of loading indicators animated with flutter.
-- [cached_network_image](https://pub.dev/packages/cached_network_image) - Flutter library to load and cache network images.
-- [shimmer](https://pub.dev/packages/shimmer) - A package provides an easy way to add a shimmer effect.
-- [intl](https://pub.dev/packages/intl) - Contains code to deal with date and number formatting and parsing.
-- [flutter_screenutil](https://pub.dev/packages/flutter_screenutil) - Adapting screen and font size.
-- [shared_preferences](https://pub.dev/packages/shared_preferences) - Persistent storage for simple data.
-- [flutter_animate](https://pub.dev/packages/flutter_animate) - Adding beautiful animated effects & builders in Flutter.
-- [carousel_slider](https://pub.dev/packages/carousel_slider) - A carousel slider widget, supports infinite scroll and custom child widget.
-- [flutter_svg](https://pub.dev/packages/flutter_svg) - SVG rendering and widget library for Flutter.
-- [lottie](https://pub.dev/packages/lottie) - Render After Effects animations natively on Flutter.
-- [step_progress_indicator](https://pub.dev/packages/step_progress_indicator) - Bar indicator made of a series of selected and unselected steps
-
----
-
-## Features 🌟
-
-- Discover the weather at your place.
-- Discover the weather around the world.
-- 24-hour weather forecast.
-- Sunrise time, sunset time
-- Wind speed and direction.
-- Provide details on humidity, pressure, UV, and chance of rain.
-- Support multiple languages (English and Arabic).
-- Toggle app theme to dark theme.
-- Beautiful and friendly user interface.
-
----
+| Package | Purpose |
+|---------|---------|
+| [GetX](https://pub.dev/packages/get) | State management & navigation |
+| [WeatherAPI](https://www.weatherapi.com/) | Weather data source |
+| [flutter_screenutil](https://pub.dev/packages/flutter_screenutil) | Responsive UI |
+| [dio](https://pub.dev/packages/dio) | HTTP networking |
+| [shared_preferences](https://pub.dev/packages/shared_preferences) | Local storage |
+| [flutter_animate](https://pub.dev/packages/flutter_animate) | Animations |
+| [lottie](https://pub.dev/packages/lottie) | Lottie animations |
+| [flutter_svg](https://pub.dev/packages/flutter_svg) | SVG assets |
+| [geolocator](https://pub.dev/packages/geolocator) | Device location |
+| [intl](https://pub.dev/packages/intl) | Date/time formatting |
 
 ## Getting Started
-1. Get your API key by creating an account at [WeatherAPI](https://www.weatherapi.com).
-2. Clone the repository
 
-   ```sh
-   git clone https://github.com/AbdQader/flutter_weather_app.git
-   ```
-3. Install all the packages by running
-   ```sh
-   flutter pub get
-   ```
-4. Navigate to **lib/utils/constants.dart** and paste your API key to the mApiKey variable
-   ```dart
-   static const mApiKey = 'Your API Key';
-   ```
-5. Run the App
-   ```dart
-   flutter run
-   ```
----
+### Prerequisites
+- Flutter SDK (>=3.0.0)
+- A free API key from [weatherapi.com](https://www.weatherapi.com/)
 
-## Don't forget to :star: the repository.
+### Setup
 
-## Support ❤️
-For support, you can contact me at this [Email](mailto:abd8alqader@gmail.com) or at [Facebook](https://www.facebook.com/aasharef/).
+1. Clone the repo
+```bash
+git clone https://github.com/YOUR_USERNAME/flutter_weather_app.git
+cd flutter_weather_app
+```
+
+2. Add your API key in `lib/utils/constants.dart`
+```dart
+static const apiKey = "YOUR_API_KEY_HERE";
+```
+
+3. Install dependencies
+```bash
+flutter pub get
+```
+
+4. Run the app
+```bash
+# Chrome
+flutter run -d chrome
+
+# Android
+flutter run -d android
+```
+
+## Project Structure
+
+```
+lib/
+├── main.dart
+├── app/
+│   ├── data/
+│   │   ├── local/          # SharedPreferences
+│   │   └── models/         # Data models
+│   ├── modules/
+│   │   ├── splash/         # Splash screen
+│   │   ├── welcome/        # Welcome/onboarding screen
+│   │   ├── home/           # Location detection
+│   │   └── weather/        # Main weather screen
+│   ├── services/           # API service layer
+│   └── components/         # Shared widgets
+├── config/
+│   ├── theme/              # Light & dark themes
+│   └── translations/       # English & Urdu strings
+└── utils/                  # Constants & extensions
+```
+
+## Credits
+
+This project is based on the original open-source work by **Abd Qader**:
+🔗 https://github.com/AbdQader/flutter_weather_app
+
+### Changes & improvements made:
+- **Added full web/Chrome support** — the original project only runs on mobile; this version runs on Chrome with a mobile-width constrained layout
+- Redesigned welcome/onboarding screen with animations
+- Fixed pixel overflow issues across all screens for web/Chrome
+- Fixed RTL overflow bugs in Urdu language mode
+- Replaced SVG icons with Material icons in weather detail cards
+- Fixed settings sheet overflow on wide screens
+- Improved 24-hour forecast card layout
+- Added mobile-width constraint for Chrome/desktop rendering
+- Fixed text scaling issues on web
+- Various UI refinements and bug fixes
+
+## License
+
+This project is for educational purposes (Final Year Project).
+Original project licensed under MIT — see [original repo](https://github.com/AbdQader/flutter_weather_app) for details.

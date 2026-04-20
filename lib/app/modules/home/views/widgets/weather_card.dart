@@ -11,80 +11,138 @@ import '../../../../routes/app_pages.dart';
 
 class WeatherCard extends StatelessWidget {
   final WeatherModel weather;
-  const WeatherCard({super.key, required this.weather});
+  final bool isCelsius;
+  const WeatherCard({super.key, required this.weather, this.isCelsius = true});
+
+  String _tempDisplay(double tempC) {
+    if (isCelsius) return '${tempC.round()}°C';
+    return '${((tempC * 9 / 5) + 32).round()}°F';
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
     return GestureDetector(
-      onTap: () => Get.toNamed(Routes.WEATHER, arguments: '${weather.location.lat},${weather.location.lon}'),
+      onTap: () => Get.toNamed(
+        Routes.WEATHER,
+        arguments: '${weather.location.lat},${weather.location.lon}',
+      ),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
+        padding: EdgeInsets.all(18.r),
         decoration: BoxDecoration(
-          color: theme.primaryColor,
-          borderRadius: BorderRadius.circular(30.r),
+          gradient: LinearGradient(
+            colors: [
+              theme.primaryColor,
+              theme.primaryColor.withOpacity(0.75),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(24.r),
+          boxShadow: [
+            BoxShadow(
+              color: theme.primaryColor.withOpacity(0.25),
+              blurRadius: 16,
+              offset: const Offset(0, 6),
+            ),
+          ],
         ),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            // Left info column
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  10.verticalSpace,
+                  Row(
+                    children: [
+                      Icon(Icons.location_on_rounded,
+                          color: Colors.white70, size: 14.sp),
+                      4.horizontalSpace,
+                      Flexible(
+                        child: Text(
+                          weather.location.country.toRightCountry(),
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                  6.verticalSpace,
                   Text(
-                    weather.location.country.toRightCountry(),
-                    style: theme.textTheme.displaySmall?.copyWith(
+                    weather.location.name.toRightCity(),
+                    style: TextStyle(
                       color: Colors.white,
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.bold,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   8.verticalSpace,
                   Text(
-                    weather.location.name.toRightCity(),
-                    style: theme.textTheme.displayMedium?.copyWith(
+                    _tempDisplay(weather.current.tempC.toDouble()),
+                    style: TextStyle(
                       color: Colors.white,
+                      fontSize: 32.sp,
+                      fontWeight: FontWeight.w700,
+                      height: 1,
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
                   ),
-                  20.verticalSpace,
+                  6.verticalSpace,
                   Text(
                     weather.current.condition.text,
-                    style: theme.textTheme.displaySmall?.copyWith(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.85),
+                      fontSize: 12.sp,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ).animate().slideX(
-                duration: 200.ms, begin: -1, curve: Curves.easeInSine,
-              ),
+                    duration: 200.ms, begin: -0.2, curve: Curves.easeOut),
             ),
+            16.horizontalSpace,
+            // Right icon column
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 CustomCachedImage(
-                  imageUrl: weather.current.condition.icon.toHighRes().addHttpPrefix(),
+                  imageUrl: weather.current.condition.icon
+                      .toHighRes()
+                      .addHttpPrefix(),
                   fit: BoxFit.cover,
-                  width: 100.w,
-                  height: 100.h,
+                  width: 80.w,
+                  height: 80.h,
                   color: Colors.white,
                 ),
-                Text(
-                  '${weather.current.tempC.round()}${Strings.celsius.tr}',
-                  style: theme.textTheme.displaySmall?.copyWith(
-                    color: Colors.white,
-                  ),
+                // Small tap hint
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Details',
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 11.sp,
+                      ),
+                    ),
+                    2.horizontalSpace,
+                    Icon(Icons.arrow_forward_ios_rounded,
+                        color: Colors.white70, size: 10.sp),
+                  ],
                 ),
               ],
             ).animate().slideX(
-              duration: 200.ms, begin: 1, curve: Curves.easeInSine,
-            ),
+                  duration: 200.ms, begin: 0.2, curve: Curves.easeOut),
           ],
         ),
       ),

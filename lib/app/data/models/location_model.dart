@@ -20,14 +20,14 @@ class Location {
   });
 
   factory Location.fromJson(Map<String, dynamic> json) => Location(
-    name: json['name'],
-    region: json['region'],
-    country: json['country'],
-    lat: json['lat']?.toDouble(),
-    lon: json['lon']?.toDouble(),
-    tzId: json['tz_id'],
-    localtimeEpoch: json['localtime_epoch'],
-    localtime: json['localtime'],
+    name: json['name'].toString(),
+    region: json['region'].toString(),
+    country: json['country'].toString(),
+    lat: (json['lat'] as num).toDouble(),
+    lon: (json['lon'] as num).toDouble(),
+    tzId: json['tz_id'].toString(),
+    localtimeEpoch: (json['localtime_epoch'] as num).toInt(),
+    localtime: json['localtime'].toString(),
   );
 
   Map<String, dynamic> toJson() => {

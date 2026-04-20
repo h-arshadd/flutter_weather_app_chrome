@@ -13,8 +13,10 @@ class MySharedPref {
   // STORING KEYS
   static const String _currentLocalKey = 'current_local';
   static const String _lightThemeKey = 'is_theme_light';
+  static const String _tempUnitKey = 'temp_unit_celsius'; // true = Celsius
+  static const String _windUnitKey = 'wind_unit_kmh';     // true = km/h
 
-  /// init get storage services
+  /// init shared preferences
   static Future<void> init() async {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
@@ -29,7 +31,7 @@ class MySharedPref {
 
   /// get if the current theme type is light
   static bool getThemeIsLight() =>
-      _sharedPreferences.getBool(_lightThemeKey) ?? true; // todo set the default theme (true for light, false for dark)
+      _sharedPreferences.getBool(_lightThemeKey) ?? true;
 
   /// save current locale
   static Future<void> setCurrentLanguage(String languageCode) =>
@@ -37,15 +39,27 @@ class MySharedPref {
 
   /// get current locale
   static Locale getCurrentLocal() {
-      String? langCode = _sharedPreferences.getString(_currentLocalKey);
-      // default language is english
-      if(langCode == null) {
-        return LocalizationService.defaultLanguage;
-      }
-      return LocalizationService.supportedLanguages[langCode]!;
+    String? langCode = _sharedPreferences.getString(_currentLocalKey);
+    if (langCode == null) {
+      return LocalizationService.defaultLanguage;
+    }
+    return LocalizationService.supportedLanguages[langCode]!;
   }
-    
+
+  /// temperature unit: true = Celsius, false = Fahrenheit
+  static Future<void> setTempUnitCelsius(bool isCelsius) =>
+      _sharedPreferences.setBool(_tempUnitKey, isCelsius);
+
+  static bool getTempUnitIsCelsius() =>
+      _sharedPreferences.getBool(_tempUnitKey) ?? true;
+
+  /// wind speed unit: true = km/h, false = mph
+  static Future<void> setWindUnitKmh(bool isKmh) =>
+      _sharedPreferences.setBool(_windUnitKey, isKmh);
+
+  static bool getWindUnitIsKmh() =>
+      _sharedPreferences.getBool(_windUnitKey) ?? true;
+
   /// clear all data from shared pref
   static Future<void> clear() async => await _sharedPreferences.clear();
-
 }
